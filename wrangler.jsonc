@@ -1,0 +1,11 @@
+{
+	// Cloudflare Workers config: serves the static Astro build from dist/ (no server code).
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "personal-portfolio",
+	"compatibility_date": "2026-11-18",
+	"assets": {
+		"directory": "./dist",
+		// Unknown URLs get dist/404.html with a 404 status.
+		"not_found_handling": "404-page"
+	}
+}
