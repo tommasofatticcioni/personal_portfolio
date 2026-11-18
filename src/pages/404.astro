@@ -1,0 +1,21 @@
+---
+import { ArrowLeft } from "lucide-react";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Card from "@/components/Card.astro";
+---
+
+<BaseLayout title="Page not found">
+	<main class="mx-auto mt-16 w-[80vw] max-w-[1400px] pb-12">
+		<Card class="bg-card/70">
+			<h1 class="font-kola text-4xl">404</h1>
+			<p class="mt-2 text-lg text-muted-foreground">This page doesn't exist or has moved.</p>
+			<a
+				href="/"
+				class="mt-6 inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+			>
+				<ArrowLeft className="size-4" />
+				Back home
+			</a>
+		</Card>
+	</main>
+</BaseLayout>

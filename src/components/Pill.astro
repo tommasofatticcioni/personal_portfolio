@@ -1,0 +1,17 @@
+---
+// The rounded tag used for skills, features and focus areas.
+interface Props {
+	size?: "sm" | "md";
+}
+
+const { size = "md" } = Astro.props;
+---
+
+<span
+	class:list={[
+		"rounded-full border border-border/50 bg-background/30",
+		size === "md" ? "px-3 py-1.5 text-sm" : "px-2.5 py-1 text-xs text-muted-foreground",
+	]}
+>
+	<slot />
+</span>

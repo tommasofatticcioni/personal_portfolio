@@ -1,16 +1,354 @@
 ---
+import { Contact, Search, Code2, Terminal, GraduationCap, Sparkles, Mail, Pin, BriefcaseBusiness } from "lucide-react";
+import { FaGithub } from "react-icons/fa";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Card from "@/components/Card.astro";
+import Pill from "@/components/Pill.astro";
+import { projects, projectStatus } from "@/data/projects";
+
+const activelySeeking = false;
+
+const education = {
+	technologies: ["Java", "Spring Boot", "C#", "ASP.NET", "JavaScript"],
+	databases: ["MySQL", "PostgreSQL", "SQL Server", "SQLite"],
+	tools: ["Git", "GitHub", "Docker"],
+};
+
+const skills = [
+	{ label: "Development", items: ["TypeScript", "JavaScript", "Java", "C#", "Node.js"] },
+	{ label: "Frameworks & Web", items: ["Spring Boot", "ASP.NET", "Tailwind CSS"] },
+	{ label: "Databases", items: ["SQL", "MySQL", "PostgreSQL", "SQL Server", "SQLite", "Prisma"] },
+	{ label: "Tools & Infrastructure", items: ["Git", "GitHub", "Docker", "pnpm", "Linux"] },
+];
+
+const currently = [
+	{ label: "Building", value: "Nothing", icon: Code2 },
+	{ label: "Learning", value: "Some new things...", icon: GraduationCap },
+	{ label: "Working with", value: "???", icon: Terminal },
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout>
+	<main class="mx-auto w-[80vw] max-w-[1400px] pb-8 mt-16">
+		<div class="grid grid-cols-1 gap-4 md:grid-cols-4 lg:grid-cols-8">
+			{/* Contacts */}
+			<Card class="min-h-[250px] md:col-span-2 lg:col-span-2 bg-card/70">
+				<div class="flex items-center gap-2">
+					<Contact className="size-6" />
+					<h2 class="font-kola text-2xl">Contacts</h2>
+				</div>
+
+				<div class="mt-8 space-y-4">
+					<div>
+						<div class="flex items-center gap-2">
+							<Mail className="size-4" color="gray" />
+							<p class="text-sm text-muted-foreground">Email</p>
+						</div>
+						<p class="text-lg">
+							<a href="mailto:tommasofatticcioni@proton.me">tommasofatticcioni@proton.me</a>
+						</p>
+					</div>
+
+					<div>
+						<div class="flex items-center gap-2">
+							<FaGithub color="gray" />
+							<p class="text-sm text-muted-foreground">Github</p>
+						</div>
+						<p class="text-lg">
+							<a href="https://github.com/tommasofatticcioni">@tommasofatticcioni</a>
+						</p>
+					</div>
+
+					<div>
+						<div class="flex items-center gap-2">
+							<Pin className="size-4" color="gray" />
+							<p class="text-sm text-muted-foreground">Location</p>
+						</div>
+						<p class="text-lg">Italy, Turin</p>
+					</div>
+				</div>
+			</Card>
+
+			{/* Who Am I? */}
+			<Card class="min-h-[250px] md:col-span-2 lg:col-span-6 bg-card/70">
+				<div class="flex items-center gap-2">
+					<Search className="size-6" />
+					<h2 class="font-kola text-2xl">Who am I?</h2>
+				</div>
+
+				<div class="mt-6">
+					<h1 class="text-3xl font-normal">
+						<code>Hi, I'm Tommaso.</code>
+					</h1>
+
+					<p class="mt-3 text-muted-foreground">
+						I'm currently a student at <code>ITS ICT Academy Piemonte</code>, studying to become a{" "}
+						<code>Software Developer</code>.
+					</p>
+
+					<p class="mt-3 text-muted-foreground">
+						My studies focus primarily on backend development, including application logic, APIs,
+						databases, and software architecture. Alongside technical development, I'm learning how to
+						work with Agile methodologies, version control, and collaborative software development.
+					</p>
+
+					<p class="mt-3 text-muted-foreground">
+						I'm particularly interested in building reliable software, learning new technologies, and
+						turning ideas into practical projects.
+					</p>
+				</div>
+			</Card>
+
+			{/* Education */}
+			<Card class="min-h-[220px] md:col-span-2 lg:col-span-4 bg-card/70">
+				<div class="flex items-center gap-2">
+					<GraduationCap className="size-6 shrink-0" />
+					<h2 class="font-kola text-2xl">Education</h2>
+
+					<span
+						class="ml-1 inline-flex items-center gap-2 rounded-full border border-border/50 bg-background/30 px-3 py-1 text-xs whitespace-nowrap"
+					>
+						<span class="h-2 w-2 rounded-full bg-green-500"></span> Currently enrolled
+					</span>
+				</div>
+
+				<div class="mt-6">
+					<p class="text-sm text-muted-foreground">Currently studying</p>
+					<h3 class="mt-1 text-2xl font-medium">Software Developer</h3>
+					<p class="mt-1 text-muted-foreground">ITS ICT Academy Piemonte</p>
+				</div>
+
+				<div class="mt-4">
+					<p class="text-muted-foreground">
+						My main focus is backend development, where I work on building server-side applications, APIs,
+						and database systems. Alongside development, I use various tools for version control,
+						containerization, database management, and maintaining efficient development workflows.
+					</p>
+
+					<div class="mt-5">
+						<p class="mb-2 text-sm text-muted-foreground">Technologies & Frameworks</p>
+						<div class="flex flex-wrap gap-2">
+							{education.technologies.map((skill) => <Pill>{skill}</Pill>)}
+						</div>
+					</div>
+
+					<div class="mt-5">
+						<p class="mb-2 text-sm text-muted-foreground">Databases</p>
+						<div class="flex flex-wrap gap-2">
+							{education.databases.map((database) => <Pill>{database}</Pill>)}
+						</div>
+					</div>
+
+					<div class="mt-5">
+						<p class="mb-2 text-sm text-muted-foreground">Tools & Workflow</p>
+						<div class="flex flex-wrap gap-2">
+							{education.tools.map((tool) => <Pill>{tool}</Pill>)}
+						</div>
+					</div>
+				</div>
+			</Card>
+
+			{/* Employment */}
+			<Card class="flex min-h-[220px] flex-col md:col-span-2 lg:col-span-4 bg-card/70">
+				<div class="flex items-center gap-2">
+					<BriefcaseBusiness className="size-6 shrink-0" />
+					<h2 class="font-kola text-2xl">Employment</h2>
+
+					<span
+						class="ml-1 inline-flex items-center gap-2 rounded-full border border-border/50 bg-background/30 px-3 py-1 text-xs whitespace-nowrap"
+					>
+						<span
+							class:list={["h-2 w-2 rounded-full", activelySeeking ? "bg-green-500" : "bg-muted-foreground"]}
+						></span>
+						{activelySeeking ? "Actively seeking" : "Not currently looking"}
+					</span>
+				</div>
+
+				{
+					activelySeeking ? (
+						<>
+							<div class="mt-6">
+								<p class="text-muted-foreground">
+									I'm currently looking for opportunities where I can grow as a developer, contribute to
+									real-world projects, and continue building my experience in software development.
+								</p>
+							</div>
+
+							<div class="mt-6 grid grid-cols-2 gap-6">
+								<div>
+									<p class="text-xs text-muted-foreground">Position</p>
+									<p class="mt-1 font-medium">Junior Software Developer</p>
+								</div>
+								<div>
+									<p class="text-xs text-muted-foreground">Contract</p>
+									<p class="mt-1 font-medium">Internship (Stage)</p>
+								</div>
+							</div>
+
+							<div class="mt-6">
+								<p class="mb-2 text-sm text-muted-foreground">Interested in</p>
+								<div class="flex flex-wrap gap-2">
+									{["Backend Development", "Software Development", "Web Development"].map((interest) => (
+										<Pill>{interest}</Pill>
+									))}
+								</div>
+							</div>
+
+							<p class="mt-auto pt-8 text-sm text-muted-foreground">
+								Have an opportunity in mind? Feel free to reach out! I'm always happy to connect and have a
+								conversation.
+							</p>
+						</>
+					) : (
+						<>
+							<div class="mt-6">
+								<p class="text-muted-foreground">
+									I'm currently focused on my studies, personal projects, and developing my skills as a
+									software developer.
+								</p>
+							</div>
+
+							<div class="mt-6">
+								<p class="mb-2 text-sm text-muted-foreground">Currently focused on</p>
+								<div class="flex flex-wrap gap-2">
+									{["Education", "Backend Development", "Personal Projects", "Software Engineering"].map(
+										(focus) => (
+											<Pill>{focus}</Pill>
+										),
+									)}
+								</div>
+							</div>
+
+							<div class="mt-6 rounded-2xl border border-border/50 bg-background/20 p-4">
+								<p class="text-sm font-medium">Still interested in working together?</p>
+								<p class="mt-1 text-sm text-muted-foreground">
+									Even when I'm not actively seeking new opportunities, feel free to reach out. I'm always
+									open to a conversation.
+								</p>
+							</div>
+						</>
+					)
+				}
+			</Card>
+
+			{/* Personal Projects */}
+			<Card class="min-h-[300px] md:col-span-2 lg:col-span-8 bg-card/70">
+				<div class="flex items-center gap-2">
+					<Code2 className="size-6 shrink-0" />
+					<h2 class="font-kola text-2xl">Personal Projects</h2>
+				</div>
+
+				<p class="mt-3 max-w-2xl text-sm text-muted-foreground">
+					A collection of projects I've built to explore new technologies, develop my skills, and turn ideas
+					into working software.
+				</p>
+
+				<div class="mt-6 grid gap-3 sm:grid-cols-2">
+					{
+						projects.map((project) => {
+							const status = projectStatus[project.status];
+
+							return (
+								<a href={project.location}>
+									<div class="rounded-2xl border border-border/50 bg-background/30 p-4 transition-colors hover:bg-background/50">
+										<div class="flex items-center justify-between gap-3">
+											<h3 class="text-lg font-medium">{project.name}</h3>
+											<span
+												class={`inline-flex items-center gap-2 rounded-full border px-2.5 py-1 text-xs whitespace-nowrap ${status.className}`}
+											>
+												<span class="size-1.5 rounded-full bg-current" />
+												{status.label}
+											</span>
+										</div>
+
+										<p class="mt-2 text-sm text-muted-foreground">{project.description}</p>
+
+										<div class="mt-4 flex flex-wrap gap-2">
+											{project.features.map((feature) => (
+												<Pill size="sm">{feature}</Pill>
+											))}
+										</div>
+
+										<div class="mt-3 flex flex-wrap gap-2">
+											{project.technologies.map((technology) => (
+												<span class="rounded-full border border-primary/20 bg-primary/5 px-2.5 py-1 text-xs text-primary">
+													{technology}
+												</span>
+											))}
+										</div>
+									</div>
+								</a>
+							);
+						})
+					}
+				</div>
+			</Card>
+
+			{/* Skills */}
+			<Card class="min-h-[220px] md:col-span-1 lg:col-span-5 bg-card/70">
+				<div class="flex items-center gap-2">
+					<Terminal className="size-5" />
+					<h2 class="font-kola text-xl">Skills</h2>
+				</div>
+
+				<p class="mt-3 max-w-2xl text-sm text-muted-foreground">
+					My experience is mainly focused on software and backend development, with an interest in building
+					applications, APIs, and full stack projects. I'm comfortable working across different parts of the
+					development stack, from databases and backend systems to modern web interfaces.
+				</p>
+
+				<div class="mt-5 space-y-4">
+					{
+						skills.map((group) => (
+							<div>
+								<p class="mb-2 text-xs text-muted-foreground">{group.label}</p>
+								<div class="flex flex-wrap gap-2">
+									{group.items.map((skill) => (
+										<Pill>{skill}</Pill>
+									))}
+								</div>
+							</div>
+						))
+					}
+				</div>
+			</Card>
+
+			{/* Currently */}
+			<Card class="flex min-h-[220px] flex-col md:col-span-1 lg:col-span-3 bg-card/70">
+				<div class="flex items-center justify-between">
+					<div class="flex items-center gap-2">
+						<Sparkles className="size-5 shrink-0" />
+						<h2 class="font-kola text-xl">Currently</h2>
+					</div>
+
+					<span
+						class="inline-flex items-center gap-2 rounded-full border border-border/50 bg-background/30 px-2.5 py-1 text-xs text-muted-foreground"
+					>
+						<span class="size-1.5 rounded-full bg-yellow-500"></span>
+						On Hold
+					</span>
+				</div>
+
+				<div class="mt-5 space-y-4">
+					{
+						currently.map((item) => (
+							<div class="flex items-start gap-3">
+								<div class="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-xl border border-border/50 bg-background/30">
+									<item.icon className="size-4" />
+								</div>
+								<div>
+									<p class="text-xs text-muted-foreground">{item.label}</p>
+									<p class="mt-0.5 font-medium">{item.value}</p>
+								</div>
+							</div>
+						))
+					}
+				</div>
+
+				<div class="mt-auto pt-5">
+					<p class="text-xs text-muted-foreground">Always learning, always building.</p>
+				</div>
+			</Card>
+		</div>
+	</main>
+</BaseLayout>
